@@ -60,6 +60,7 @@ const EditUserDetails = ({onClose,user}) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         e.stopPropagation();
+        let token = localStorage.getItem("token");
         try {
             const URL = `${process.env.REACT_APP_BACKEND_URL}/api/update-user`;
             const sanitizedData = sanitizeData(data); // Sanitize data before sending
@@ -70,7 +71,8 @@ const EditUserDetails = ({onClose,user}) => {
                 data: sanitizedData, // Use sanitized data
                 withCredentials: true,
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
                 }
             });
     
